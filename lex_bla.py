@@ -37,7 +37,7 @@ def t_WHITESPACE(t):
 
 def t_COMMENT(t):
     r'//.*|/\*[\s\S]*?\*/'
-    t.value = "COMMENT" + t.value
+    t.value = "COMMENT"
     return t
 
 def t_A(t):
