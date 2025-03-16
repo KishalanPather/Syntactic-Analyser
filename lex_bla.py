@@ -86,11 +86,16 @@ fileName = sys.argv[1]
 blaFile = open(f"{fileName}", "r")
 data = blaFile.read()
 
+#create or write to file
+fileName = fileName.removesuffix(".bla")
+tknFile = open(f"{fileName}.tkn","w")
 
-#lex
+
+#print and write 
 lexer.input(data)
 for tok in lexer:
     print(tok.value)
-    #tknFile.write(tok.value + "\n")
+    tknFile.write(tok.value + "\n")
 
 blaFile.close()
+tknFile.close()
