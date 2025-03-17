@@ -9,13 +9,14 @@ def p_program(p):
 
 def p_statement(p):
     'Statement : Identifier EQUALS Expression'
+    p[0] = ('statement',p[1], p[2], p[3])
 
 def p_expression(p):
     '''Expression : Expression A Term
                 | Expression S Term
                 | Term
-    
     '''
+    p[0] = ('expression', p[1], p[2], p[3])
 
 def p_term(p):
     '''
@@ -23,12 +24,14 @@ def p_term(p):
         | Term D Factor
         | Factor
     '''
+    p[0] = ('term',p[1], p[2], p[3])
 
 def p_factor(p):
     '''
     Factor : LEFT_BRACKET Expression RIGHT_BRACKET
             | Identifier
     '''
+    p[0] = ('factor', p[1], p[2], p[3])
 
 
 # Error rule for syntax errors
@@ -40,7 +43,7 @@ parser = yacc.yacc()
 
 while True:
    try:
-       #s = raw_input('calc > ')
+       s = "a=1"
        pass
    except EOFError:
        break

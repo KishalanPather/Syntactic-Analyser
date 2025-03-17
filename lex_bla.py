@@ -78,24 +78,26 @@ def t_error(t):
     t.lexer.skip(1)
 
 
+
 # Build the lexer
 lexer = lex.lex()
 
-#read in file
-fileName = sys.argv[1]
-blaFile = open(f"{fileName}", "r")
-data = blaFile.read()
+if __name__ == "__main__":
+    #read in file
+    fileName = sys.argv[1]
+    blaFile = open(f"{fileName}", "r")
+    data = blaFile.read()
 
-#create or write to file
-fileName = fileName.removesuffix(".bla")
-tknFile = open(f"{fileName}.tkn","w")
+    #create or write to file
+    fileName = fileName.removesuffix(".bla")
+    tknFile = open(f"{fileName}.tkn","w")
 
 
-#print and write 
-lexer.input(data)
-for tok in lexer:
-    print(tok.value)
-    tknFile.write(tok.value + "\n")
+    #print and write 
+    lexer.input(data)
+    for tok in lexer:
+        print(tok.value)
+        tknFile.write(tok.value + "\n")
 
-blaFile.close()
-tknFile.close()
+    blaFile.close()
+    tknFile.close()
