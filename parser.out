@@ -1,0 +1,341 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    WHITESPACE
+
+Grammar
+
+Rule 0     S' -> Program
+Rule 1     Program -> Statement Program
+Rule 2     Program -> <empty>
+Rule 3     Statement -> ID EQUALS Expression
+Rule 4     Expression -> Expression A Term
+Rule 5     Expression -> Expression S Term
+Rule 6     Expression -> Term
+Rule 7     Term -> Term M Factor
+Rule 8     Term -> Term D Factor
+Rule 9     Term -> Factor
+Rule 10    Factor -> LEFT_BRACKET Expression RIGHT_BRACKET
+Rule 11    Factor -> BINARY_LITERAL
+Rule 12    Factor -> ID
+
+Terminals, with rules where they appear
+
+A                    : 4
+BINARY_LITERAL       : 11
+COMMENT              : 
+D                    : 8
+EQUALS               : 3
+ID                   : 3 12
+LEFT_BRACKET         : 10
+M                    : 7
+RIGHT_BRACKET        : 10
+S                    : 5
+WHITESPACE           : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+Expression           : 3 4 5 10
+Factor               : 7 8 9
+Program              : 1 0
+Statement            : 1
+Term                 : 4 5 6 7 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Program
+    (1) Program -> . Statement Program
+    (2) Program -> .
+    (3) Statement -> . ID EQUALS Expression
+
+    $end            reduce using rule 2 (Program -> .)
+    ID              shift and go to state 3
+
+    Program                        shift and go to state 1
+    Statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> Program .
+
+
+
+state 2
+
+    (1) Program -> Statement . Program
+    (1) Program -> . Statement Program
+    (2) Program -> .
+    (3) Statement -> . ID EQUALS Expression
+
+    $end            reduce using rule 2 (Program -> .)
+    ID              shift and go to state 3
+
+    Statement                      shift and go to state 2
+    Program                        shift and go to state 4
+
+state 3
+
+    (3) Statement -> ID . EQUALS Expression
+
+    EQUALS          shift and go to state 5
+
+
+state 4
+
+    (1) Program -> Statement Program .
+
+    $end            reduce using rule 1 (Program -> Statement Program .)
+
+
+state 5
+
+    (3) Statement -> ID EQUALS . Expression
+    (4) Expression -> . Expression A Term
+    (5) Expression -> . Expression S Term
+    (6) Expression -> . Term
+    (7) Term -> . Term M Factor
+    (8) Term -> . Term D Factor
+    (9) Term -> . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Expression                     shift and go to state 7
+    Term                           shift and go to state 8
+    Factor                         shift and go to state 9
+
+state 6
+
+    (12) Factor -> ID .
+
+    M               reduce using rule 12 (Factor -> ID .)
+    D               reduce using rule 12 (Factor -> ID .)
+    A               reduce using rule 12 (Factor -> ID .)
+    S               reduce using rule 12 (Factor -> ID .)
+    ID              reduce using rule 12 (Factor -> ID .)
+    $end            reduce using rule 12 (Factor -> ID .)
+    RIGHT_BRACKET   reduce using rule 12 (Factor -> ID .)
+
+
+state 7
+
+    (3) Statement -> ID EQUALS Expression .
+    (4) Expression -> Expression . A Term
+    (5) Expression -> Expression . S Term
+
+    ID              reduce using rule 3 (Statement -> ID EQUALS Expression .)
+    $end            reduce using rule 3 (Statement -> ID EQUALS Expression .)
+    A               shift and go to state 12
+    S               shift and go to state 13
+
+
+state 8
+
+    (6) Expression -> Term .
+    (7) Term -> Term . M Factor
+    (8) Term -> Term . D Factor
+
+    A               reduce using rule 6 (Expression -> Term .)
+    S               reduce using rule 6 (Expression -> Term .)
+    ID              reduce using rule 6 (Expression -> Term .)
+    $end            reduce using rule 6 (Expression -> Term .)
+    RIGHT_BRACKET   reduce using rule 6 (Expression -> Term .)
+    M               shift and go to state 14
+    D               shift and go to state 15
+
+
+state 9
+
+    (9) Term -> Factor .
+
+    M               reduce using rule 9 (Term -> Factor .)
+    D               reduce using rule 9 (Term -> Factor .)
+    A               reduce using rule 9 (Term -> Factor .)
+    S               reduce using rule 9 (Term -> Factor .)
+    ID              reduce using rule 9 (Term -> Factor .)
+    $end            reduce using rule 9 (Term -> Factor .)
+    RIGHT_BRACKET   reduce using rule 9 (Term -> Factor .)
+
+
+state 10
+
+    (10) Factor -> LEFT_BRACKET . Expression RIGHT_BRACKET
+    (4) Expression -> . Expression A Term
+    (5) Expression -> . Expression S Term
+    (6) Expression -> . Term
+    (7) Term -> . Term M Factor
+    (8) Term -> . Term D Factor
+    (9) Term -> . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Expression                     shift and go to state 16
+    Term                           shift and go to state 8
+    Factor                         shift and go to state 9
+
+state 11
+
+    (11) Factor -> BINARY_LITERAL .
+
+    M               reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    D               reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    A               reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    S               reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    ID              reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    $end            reduce using rule 11 (Factor -> BINARY_LITERAL .)
+    RIGHT_BRACKET   reduce using rule 11 (Factor -> BINARY_LITERAL .)
+
+
+state 12
+
+    (4) Expression -> Expression A . Term
+    (7) Term -> . Term M Factor
+    (8) Term -> . Term D Factor
+    (9) Term -> . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Term                           shift and go to state 17
+    Factor                         shift and go to state 9
+
+state 13
+
+    (5) Expression -> Expression S . Term
+    (7) Term -> . Term M Factor
+    (8) Term -> . Term D Factor
+    (9) Term -> . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Term                           shift and go to state 18
+    Factor                         shift and go to state 9
+
+state 14
+
+    (7) Term -> Term M . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Factor                         shift and go to state 19
+
+state 15
+
+    (8) Term -> Term D . Factor
+    (10) Factor -> . LEFT_BRACKET Expression RIGHT_BRACKET
+    (11) Factor -> . BINARY_LITERAL
+    (12) Factor -> . ID
+
+    LEFT_BRACKET    shift and go to state 10
+    BINARY_LITERAL  shift and go to state 11
+    ID              shift and go to state 6
+
+    Factor                         shift and go to state 20
+
+state 16
+
+    (10) Factor -> LEFT_BRACKET Expression . RIGHT_BRACKET
+    (4) Expression -> Expression . A Term
+    (5) Expression -> Expression . S Term
+
+    RIGHT_BRACKET   shift and go to state 21
+    A               shift and go to state 12
+    S               shift and go to state 13
+
+
+state 17
+
+    (4) Expression -> Expression A Term .
+    (7) Term -> Term . M Factor
+    (8) Term -> Term . D Factor
+
+    A               reduce using rule 4 (Expression -> Expression A Term .)
+    S               reduce using rule 4 (Expression -> Expression A Term .)
+    ID              reduce using rule 4 (Expression -> Expression A Term .)
+    $end            reduce using rule 4 (Expression -> Expression A Term .)
+    RIGHT_BRACKET   reduce using rule 4 (Expression -> Expression A Term .)
+    M               shift and go to state 14
+    D               shift and go to state 15
+
+
+state 18
+
+    (5) Expression -> Expression S Term .
+    (7) Term -> Term . M Factor
+    (8) Term -> Term . D Factor
+
+    A               reduce using rule 5 (Expression -> Expression S Term .)
+    S               reduce using rule 5 (Expression -> Expression S Term .)
+    ID              reduce using rule 5 (Expression -> Expression S Term .)
+    $end            reduce using rule 5 (Expression -> Expression S Term .)
+    RIGHT_BRACKET   reduce using rule 5 (Expression -> Expression S Term .)
+    M               shift and go to state 14
+    D               shift and go to state 15
+
+
+state 19
+
+    (7) Term -> Term M Factor .
+
+    M               reduce using rule 7 (Term -> Term M Factor .)
+    D               reduce using rule 7 (Term -> Term M Factor .)
+    A               reduce using rule 7 (Term -> Term M Factor .)
+    S               reduce using rule 7 (Term -> Term M Factor .)
+    ID              reduce using rule 7 (Term -> Term M Factor .)
+    $end            reduce using rule 7 (Term -> Term M Factor .)
+    RIGHT_BRACKET   reduce using rule 7 (Term -> Term M Factor .)
+
+
+state 20
+
+    (8) Term -> Term D Factor .
+
+    M               reduce using rule 8 (Term -> Term D Factor .)
+    D               reduce using rule 8 (Term -> Term D Factor .)
+    A               reduce using rule 8 (Term -> Term D Factor .)
+    S               reduce using rule 8 (Term -> Term D Factor .)
+    ID              reduce using rule 8 (Term -> Term D Factor .)
+    $end            reduce using rule 8 (Term -> Term D Factor .)
+    RIGHT_BRACKET   reduce using rule 8 (Term -> Term D Factor .)
+
+
+state 21
+
+    (10) Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .
+
+    M               reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    D               reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    A               reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    S               reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    ID              reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    $end            reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+    RIGHT_BRACKET   reduce using rule 10 (Factor -> LEFT_BRACKET Expression RIGHT_BRACKET .)
+
