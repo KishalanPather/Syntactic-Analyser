@@ -1,13 +1,16 @@
 import ply.yacc as yacc
 import sys
+import lex_bla
 
 from lex_bla import tokens
 
 def p_program(p):
-    '''Program : Statement Program 
-                | 
-    '''
-    p[0] = ('program', p[1], p[2])
+    '''Program : Statement Program
+                | Statement
+        '''
+    p[0] = ('Program')
+    for i in p:
+        print(i)
 
 def p_statement(p):
     'Statement : ID EQUALS Expression'
@@ -61,21 +64,15 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-while True:
-   try:
-       s = '''
-        // this is a comment
-        /* this is another comment */
-        /* this is one more
-        comment which should
-        be recognised */
-        a=1
-        '''
-   except EOFError:
-       print("YEAH BIG BIG PROBLEM")
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
+s = '''
+/* doing some 
+calculations */
+val = 1100
+result = val M (111000 S 110001) // answer
+
+'''
+
+result = parser.parse(s, lexer=lex_bla.lexer)
+print("Result",result)
 
 

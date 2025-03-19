@@ -33,12 +33,12 @@ def t_EQUALS(t):
 def t_WHITESPACE(t):
     r'\s+'
     t.value = "WHITESPACE"
-    return t
+    #return t
 
 def t_COMMENT(t):
     r'//.*|/\*[\s\S]*?\*/'
     t.value = "COMMENT"
-    return t
+    #return t
 
 def t_A(t):
     r'A'
